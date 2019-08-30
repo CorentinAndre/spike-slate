@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import { Editor } from 'slate-react';
-import { Value } from 'slate'
+import { Value } from 'slate';
 import './App.css';
 
 const initialValue = Value.fromJSON({
