@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ornikar/browserslist-config": "^1.2.0",
+    "@ornikar/kitt": "^16.14.1",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-json-view": "^1.19.1",
     "react-scripts": "3.1.1",
     "slate": "^0.47.8",
     "slate-react": "^0.22.8"

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
+import ReactJson from 'react-json-view';
+import '@ornikar/kitt/dist/kitt-default.css';
+import {Typography} from '@ornikar/kitt';
 import './App.css';
 
 const initialValue = Value.fromJSON({
@@ -25,8 +28,9 @@ const MarkHotkey = options => {
 
   return {
     onKeyDown: (event, editor, next) => {
+      console.log('onKeyDown')
       if (!event.ctrlKey || event.key !== key) return next()
-
+      console.log('is ctrl')
       // Prevent the default characters from being inserted.
       event.preventDefault()
 
@@ -73,11 +77,11 @@ const BoldMark = ({ children }) => <strong>{children}</strong>
 const ItalicMark = ({children}) => <i>{children}</i>
 
 const renderBlock = (props, editor, next) => {
-  console.log(props.node.type)
   switch (props.node.type) {
     case "code":
       return <CodeNode {...props} />
-  
+    case "paragraph":
+      return <Typography.div>{props.children}</Typography.div>
     default:
       return next();
   }
@@ -86,7 +90,7 @@ const renderBlock = (props, editor, next) => {
 const renderMark = (props, editor, next) => {
   switch (props.mark.type) {
     case "bold":
-      return <BoldMark {...props} />
+      return <Typography.span variant="bold">{props.children}</Typography.span>
     case "italic":
       return <ItalicMark {...props} />
     default:
@@ -110,6 +114,7 @@ function App() {
         renderBlock={renderBlock}
         renderMark={renderMark}
       />
+      <div className="ValuePreviewer"><ReactJson src={editorValue.toJSON()}/></div>
     </div>
   );
 }
